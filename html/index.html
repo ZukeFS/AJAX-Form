@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Form</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="text-success text-center">AJAX Asynchronous Javascript and XML</h3>
+            </div>
+
+            <form action="">
+                <div class="form-group">
+                    <label for="user">Username: </label>
+                    <input type="text" name="" id="user" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="pwd">Password: </label>
+                    <input type="password" name="" id="pwd" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="">Choose State:</label>
+                    <select name="" id="" class="form-control" onchange="myfun(this.value)">
+                        <option value="">Select state</option>
+                        <option value="">Assam</option>
+                        <option value="">Karnataka</option>
+                        <option value="">West Bengal</option>
+                        <option value="">Maharashtra</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Choose city:</label>
+                    <select name="" id="city" class="form-control">
+                        <option value="">Select city</option>
+                        
+                    </select>
+                </div>
+            </form>
+        </div>
+    </div> 
+
+    <script type="text/javascript">
+        function myfun(data){
+            alert(data);
+
+            var req = new XMLHttpRequest();
+            req.open("GET", "http://localhost:5500/html/response.php?datavalue="+data, true);
+            req.send();
+
+            req.onreadystatechange = function(){
+                if(req.readyState == 4 && req.status == 200){
+                    document.getElementById('city').innerHTML = req.responseText;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
